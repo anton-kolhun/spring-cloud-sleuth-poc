@@ -18,6 +18,10 @@ public class TracingAspect {
     @Around("within(org.springframework.data.jpa.repository.JpaRepository+)" +
             " || execution(public * com.sandbox.springsleuth.service.*.*(..))")
     public Object traceAround(ProceedingJoinPoint pjp) throws Throwable {
+        return createSpan(pjp);
+    }
+
+    private Object createSpan(ProceedingJoinPoint pjp) throws Throwable {
         String methodName = pjp.getSignature().getName();
         String className = pjp.getSignature().getDeclaringType().getSimpleName();
         //final String parameters = Arrays.toString(pjp.getArgs());
@@ -31,6 +35,12 @@ public class TracingAspect {
         span.finish();
 
         return retVal;
+    }
+
+    @Around("execution(* org.springframework.http.converter.AbstractHttpMessageConverter+.writeInternal(..))" +
+            "|| execution(* org.springframework.http.converter.AbstractHttpMessageConverter+.read(..))")
+    public Object traceAroundJackson(ProceedingJoinPoint pjp) throws Throwable {
+        return createSpan(pjp);
     }
 
 
