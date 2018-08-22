@@ -15,11 +15,11 @@ public class CustomHttpServerParser extends HttpServerParser {
 
     @Override
     public <Req> void request(HttpAdapter<Req, ?> adapter, Req req, SpanCustomizer customizer) {
-        //populates keys at controllet layer
+        //populates keys at controller layer
         customizer.tag(TracingExtraFields.KEY1.getKey(), "value1");
         customizer.tag(TracingExtraFields.KEY2.getKey(), "value2");
 
-        //sets tracer.currentSpan().context.extra.values tht will be used for all subsequent spans.
+        //sets tracer.currentSpan().context.extra.values that will be used for all subsequent spans.
         ExtraFieldPropagation.set(tracer.currentSpan().context(), TracingExtraFields.KEY1.getKey(), "value1");
         ExtraFieldPropagation.set(tracer.currentSpan().context(), TracingExtraFields.KEY2.getKey(), "value2");
         super.request(adapter, req, customizer);
