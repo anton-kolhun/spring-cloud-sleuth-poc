@@ -17,6 +17,11 @@ public class AppConfig {
         return new RestTemplate();
     }
 
+    @Bean
+    public TracingAspect tracingAspect() {
+        return new TracingAspect();
+    }
+
     /*@Bean
     public Sampler sampler() {
         return Sampler.ALWAYS_SAMPLE;
