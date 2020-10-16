@@ -8,7 +8,7 @@
 
     <!-- You can override this to have a custom pattern -->
     <property name="CONSOLE_LOG_PATTERN"
-              value="%d{HH:mm:ss.SSS} %highlight(%5p) [%mdc{X-B3-TraceId:-},%mdc{X-B3-SpanId:-},%mdc{X-Span-Export:-}] %logger{36} - %msg%n"/>
+              value="%d{HH:mm:ss.CONSOLE_LOG_PATTERNSSS} %highlight(%5p) [%mdc{X-B3-TraceId:-}, %mdc{X-B3-ParentSpanId:-}, %mdc{X-B3-SpanId:-}, %mdc{X-Span-Export:-}] %logger{36} - %msg%n"/>
 
     <!-- Appender to log to console -->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
